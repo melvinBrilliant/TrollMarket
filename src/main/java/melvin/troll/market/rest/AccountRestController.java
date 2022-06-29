@@ -1,6 +1,7 @@
 package melvin.troll.market.rest;
 
 import melvin.troll.market.dto.RestResponse;
+import melvin.troll.market.dto.account.AccountBalanceDto;
 import melvin.troll.market.dto.account.RegisterAdminDto;
 import melvin.troll.market.dto.account.RegisterBuyerSellerDto;
 import melvin.troll.market.dto.account.RegisterJwtDto;
@@ -98,6 +99,18 @@ public class AccountRestController {
                 .body(new RestResponse<>(
                         jwt,
                         message,
+                        "201"
+                ));
+    }
+
+    @PostMapping("add-balance")
+    public ResponseEntity<RestResponse<AccountBalanceDto>> addAccountsBalance(
+            @RequestParam Double additionalBalance,
+            Authentication authentication) {
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(new RestResponse<>(
+                        accountService.addBuyersBalance(authentication, additionalBalance),
+                        "Your balance has beed added",
                         "201"
                 ));
     }
