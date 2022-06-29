@@ -16,4 +16,5 @@ public class UpsertShipmentDto {
     private String companyName;
     @NotNull(message = "Shipment price can not be empty!")
     private Double price;
+    private Boolean service;
 }

@@ -44,14 +44,16 @@ public class RestSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.antMatcher("/api/**").csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/api/register/seller", // ACCOUNT
-                        "/api/register/buyer", // ACCOUNT
-                        "/api/jwt" // ACCOUNT
+                .antMatchers("/api/register/seller",
+                        "/api/register/buyer",
+                        "/api/jwt"
                 ).permitAll()
                 .antMatchers("/api/register/admin",
                         "/api/category/upsert",
                         "/api/shipment/all",
                         "/api/shipment/upsert").hasAuthority("ADMIN")
+                .antMatchers("/api/product/update",
+                        "/api/product/insert").hasAuthority("SELLER")
                 .antMatchers(
                         "/api/auth",
                         "/api/category/index",

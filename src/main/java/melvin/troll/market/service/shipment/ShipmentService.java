@@ -45,7 +45,7 @@ public class ShipmentService implements IShipmentService{
                 .id(dto.getId())
                 .companyName(dto.getCompanyName())
                 .price(BigDecimal.valueOf(dto.getPrice()))
-                .service(true)
+                .service(dto.getService() == null || dto.getService())
                 .build();
         shipmentRepository.save(shipment);
         return new ShipmentHeaderDto(
