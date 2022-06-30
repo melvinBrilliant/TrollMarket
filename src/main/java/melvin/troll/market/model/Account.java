@@ -1,6 +1,9 @@
 package melvin.troll.market.model;
 
 import lombok.*;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.core.Authentication;
+import org.springframework.web.server.ResponseStatusException;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -42,4 +45,12 @@ public class Account {
     @OneToMany(mappedBy = "customerID")
     private Set<Cart> carts = new LinkedHashSet<>();
 
+    public void isAppropriateRole(String assignedRole, String message) {
+        if (!role.equals(assignedRole)) {
+            throw new ResponseStatusException(
+                    HttpStatus.FORBIDDEN,
+                    message
+            );
+        }
+    }
 }

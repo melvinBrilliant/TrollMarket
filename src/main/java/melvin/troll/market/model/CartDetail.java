@@ -3,6 +3,7 @@ package melvin.troll.market.model;
 import lombok.*;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 
 @Builder
 @AllArgsConstructor
@@ -29,7 +30,10 @@ public class CartDetail {
     private Integer quantity;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "ShipID", nullable = false)
+    @JoinColumn(name = "ShipID")
     private Shipment shipID;
+
+    @Column(name = "PricePerUnit")
+    private BigDecimal pricePerUnit;
 
 }
