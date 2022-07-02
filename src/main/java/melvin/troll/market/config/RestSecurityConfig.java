@@ -54,7 +54,10 @@ public class RestSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/api/shipment/upsert").hasAuthority("ADMIN")
                 .antMatchers("/api/product/update",
                         "/api/product/insert").hasAuthority("SELLER")
-                .antMatchers("/api/add-balance").hasAuthority("BUYER")
+                .antMatchers("/api/add-balance",
+                        "/api/cart",
+                        "/api/cart/add",
+                        "/api/cart/remove").hasAuthority("BUYER")
                 .antMatchers(
                         "/api/auth",
                         "/api/category/index",

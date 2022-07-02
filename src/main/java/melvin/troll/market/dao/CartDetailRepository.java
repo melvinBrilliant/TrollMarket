@@ -17,14 +17,23 @@ public interface CartDetailRepository extends JpaRepository<CartDetail, CartDeta
             	p.id,
             	cd.quantity,
             	sell.id,
-            	p.price
+            	s.id,
+            	(p.price * cd.quantity) + s.price
             )
             FROM CartDetail cd
             INNER JOIN cd.cartID AS c
             INNER JOIN cd.productID AS p
             INNER JOIN c.customerID AS buy
             INNER JOIN p.sellerID AS sell
+            INNER JOIN cd.shipID AS s
             WHERE (buy.id = :username) AND (c.purchaseDate IS NULL)
             """)
     List<CartDetailDto> viewCart(String username);
+
+    @Query(value = """
+            SELECT *
+            FROM CartDetails
+            WHERE CartID = :cartId
+            """, nativeQuery = true)
+    List<CartDetail> findCartDetailByCartId(Integer cartId);
 }

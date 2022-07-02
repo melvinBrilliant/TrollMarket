@@ -45,12 +45,4 @@ public class Account {
     @OneToMany(mappedBy = "customerID")
     private Set<Cart> carts = new LinkedHashSet<>();
 
-    public void isAppropriateRole(String assignedRole, String message) {
-        if (!role.equals(assignedRole)) {
-            throw new ResponseStatusException(
-                    HttpStatus.FORBIDDEN,
-                    message
-            );
-        }
-    }
 }

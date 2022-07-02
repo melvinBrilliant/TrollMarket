@@ -15,5 +15,6 @@ public class CartDetailDto {
     private Integer productId;
     private Integer quantity;
     private String sellerId;
-    private BigDecimal price;
+    private Integer shipId;
+    private BigDecimal totalPrice;
 }
